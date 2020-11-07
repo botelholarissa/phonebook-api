@@ -1,0 +1,26 @@
+{
+  "name": "phonebook-api",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido em aula na {reprograma}. Semana 14.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botelholarissa/phonebook-api.git"
+  },
+  "author": "Larissa Botelho de Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/botelholarissa/phonebook-api/issues"
+  },
+  "homepage": "https://github.com/botelholarissa/phonebook-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.13",
+    "nodemon": "^2.0.6"
+  }
+}
