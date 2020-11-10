@@ -2,7 +2,6 @@ const contactsColletion = require('../models/contactsSchema');
 const contactsCollections = require('../models/contactsSchema');
 
 const getAll = (request, response)=>{
-    console.log(request.url);
     contactsCollections.find((error, contacts) => {
         if(error){
             return response.status(500).send(error);
@@ -18,7 +17,7 @@ const getAll = (request, response)=>{
 const addContact = (request, response) => {
     const contactBody = request.body; //pegando o body
 
-    const contact = new contactsColletion(contactBody); //criando um novo dado com o Body
+    const contact = new contactsCollections(contactBody); //criando um novo dado com o Body
 
     contact.save((error)=>{
         if(error){
@@ -33,7 +32,6 @@ const addContact = (request, response) => {
 }
 
  const getByName = (request, response) => {
-    console.log(request.url);
     const nameParam = request.params.name;
     
     console.log(nameParam);
@@ -58,11 +56,10 @@ const getById = (request, response) => {
     const idParam = request.params.id;
     
     contactsCollections.findById(idParam, (error, contact) =>{
-        console.log(contact)
         if (error){
             return response.status(500).send(error);
         } else {
-            if(contact !== undefined){
+            if(contact !== null){
                 return response.status(200).send({
                     message: "GET por Id com sucesso",
                     contact
@@ -74,9 +71,29 @@ const getById = (request, response) => {
     })
 }
 
+const deleteById = (request, response) => {
+    const idParam = request.params.id;
+
+    contactsCollections.findByIdAndDelete(idParam, (error, contacts) => {
+        if (error){
+            return response.status(500).send(error);
+        } else {
+            if(contacts){
+                return response.status(200).send({
+                    message: "DELETE com sucesso"
+                });
+            } else {
+                return response.status(404);
+            }
+        }
+    })
+}
+
+
 module.exports = {
     getAll,
     addContact,
     getByName,
-    getById
+    getById,
+    deleteById
 }
