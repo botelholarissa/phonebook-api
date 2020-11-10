@@ -38,12 +38,15 @@ const addContact = (request, response) => {
     
     console.log(nameParam);
 
-    contactsCollections.find({name: nameParam}, (error, contact)=>{
+    contactsCollections.findOne({name: nameParam}, (error, contact)=>{
         if (error){
             return response.status(500).send(error);
         } else {
             if(contact){
-                return response.status(200).send(contact);
+                return response.status(200).send({
+                    message: "GET por nome com sucesso",
+                    contact
+                });
             } else {
                 return response.status(404).send("Contato não existe.")
             }
@@ -51,8 +54,29 @@ const addContact = (request, response) => {
     })   
 }
 
+const getById = (request, response) => {
+    const idParam = request.params.id;
+    
+    contactsCollections.findById(idParam, (error, contact) =>{
+        console.log(contact)
+        if (error){
+            return response.status(500).send(error);
+        } else {
+            if(contact !== undefined){
+                return response.status(200).send({
+                    message: "GET por Id com sucesso",
+                    contact
+                });
+            } else {
+                return response.status(404).send("Contato não existe.")
+            }
+        }
+    })
+}
+
 module.exports = {
     getAll,
     addContact,
-    getByName
+    getByName,
+    getById
 }
