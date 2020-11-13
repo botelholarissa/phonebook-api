@@ -7,6 +7,8 @@ router.post('/criar', controller.addContact);
 router.get('/nome/:name', controller.getByName);
 router.get('/id/:id', controller.getById);
 router.delete('/deletar/:id', controller.deleteById);
+router.put('/atualizar/telefone/:id', controller.updatePhone);
+router.patch('/atualizar', controller.updateContact);
 
 
 module.exports = router;
